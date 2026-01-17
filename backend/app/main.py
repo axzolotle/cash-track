@@ -3,14 +3,20 @@ from app.database import Base, engine
 
 from app.models import (
     transaction,
+    asset,
     wallet,
     category,
     budget,
-    wishlist,
-    saving
+    wishlist
 )
 
+from app.routers import transaction
+from app.routers import category
+
 app = FastAPI(title="Money Tracker API")
+
+app.include_router(transaction.router)
+app.include_router(category.router)
 
 Base.metadata.create_all(bind=engine)
 
