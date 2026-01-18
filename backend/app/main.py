@@ -7,19 +7,23 @@ from app.models import (
     wallet,
     category,
     budget,
-    wishlist
+    wishlist,
 )
 
 from app.routers import transaction
 from app.routers import category
+from app.routers import testing
 
 app = FastAPI(title="Money Tracker API")
 
 app.include_router(transaction.router)
 app.include_router(category.router)
+app.include_router(testing.router)
 
 Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def root():
     return {"status": "Backend is running"}
+
+
